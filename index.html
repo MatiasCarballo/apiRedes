@@ -51,14 +51,14 @@
   function loginWithFacebook() {
     FB.login(function(response) {
       statusChangeCallback(response);
-    }, {scope: 'public_profile,email,user_profile'});
+    }, {scope: 'public_profile,email,user_profile, '});
   }
 
   // Función para obtener la información del usuario
   function getUserInfo() {
     FB.api('/me', {fields: 'id,name,email,picture'}, function(response) {
         document.getElementById('userInfo').innerHTML = `
-        <img src="${response.picture.data.url}" />
+        <img src="${response.picture}" />
         <p>Bienvenido, ${response.name}!</p>
         <p>Email: ${response.email}</p>
         <button onclick="logout()">Cerrar sesión</button>
