@@ -15,7 +15,7 @@
   // Inicializar el SDK de Facebook
   window.fbAsyncInit = function() {
     FB.init({
-      appId            : 882148299791454,
+      appId            : 196135773574850,
       autoLogAppEvents : true,
       xfbml            : true,
       version          : 'v18.0'
@@ -37,10 +37,10 @@
    }(document, 'script', 'facebook-jssdk'));
 
   // Función para manejar el cambio de estado de inicio de sesión
-  async function statusChangeCallback(response) {
+  function statusChangeCallback(response) {
     if (response.status === 'connected') {
       // Usuario conectado, obtener información del usuario
-      await getUserInfo();
+      getUserInfo();
     } else {
       // Usuario no conectado, mostrar botón de inicio de sesión
       document.getElementById('userInfo').innerHTML = '<button onclick="loginWithFacebook()">Iniciar sesión con Facebook</button>';
@@ -51,27 +51,19 @@
   function loginWithFacebook() {
     FB.login(function(response) {
       statusChangeCallback(response);
-    }, {scope: 'public_profile,email,user_profile, '});
+    }, {scope: 'public_profile,email'});
   }
 
   // Función para obtener la información del usuario
-  async function getUserInfo() {
-    await FB.api('/me', {fields: 'id,name,email'}, function(response) {
-        document.getElementById('userInfo').innerHTML = `
+  function getUserInfo() {
+    FB.api('/me', {fields: 'id,name,email'}, function(response) {
+      document.getElementById('userInfo').innerHTML = `
         <p>Bienvenido, ${response.name}!</p>
         <p>Email: ${response.email}</p>
         <button onclick="logout()">Cerrar sesión</button>
-        `;
-        console.log(response);
+      `;
+      console.log(response);
     });
-    //FB.api(
-    //    `/61553736346581/picture?redirect=0&height=200&type=normal&width=200`,
-    //    'GET',
-    //    {},
-    //    function(res) {
-    //      console.log(res);
-    //    }
-    //  );
   }
 
   // Función para cerrar sesión
