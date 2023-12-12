@@ -37,13 +37,13 @@
    }(document, 'script', 'facebook-jssdk'));
 
   // Función para manejar el cambio de estado de inicio de sesión
-  function statusChangeCallback(response) {
+  async function statusChangeCallback(response) {
     if (response.status === 'connected') {
       // Usuario conectado, obtener información del usuario
-      getUserInfo();
+      await getUserInfo();
     } else {
       // Usuario no conectado, mostrar botón de inicio de sesión
-      document.getElementById('userInfo').innerHTML = '<button onclick="loginWithFacebook()">Iniciar sesión con Facebook</button>';
+      await document.getElementById('userInfo').innerHTML = '<button onclick="loginWithFacebook()">Iniciar sesión con Facebook</button>';
     }
   }
 
