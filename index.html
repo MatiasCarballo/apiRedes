@@ -3,9 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Api Redes</title>
+    <title>Facebook Login Example</title>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
 </head>
 <body>
-    <h1>Hola Api Redes!</h1>
+
+<!-- Contenedor para mostrar la información del usuario -->
+<div id="userInfo"></div>
+
+<script>
+  // Inicializar el SDK de Facebook
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId            : 882148299791454,
+      autoLogAppEvents : true,
+      xfbml            : true,
+      version          : 'v18.0'
+    });
+
+    // Verificar el estado de inicio de sesión al cargar la página
+    FB.getLoginStatus(function(response) {
+      statusChangeCallback(response);
+    });
+  };
+
+  // Cargar el SDK de Facebook de forma asíncrona
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "https://connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+
+  // Función para manejar el cambio de estado de inicio de sesión
+  function statusChangeCallback(response) {
+    if (response.status === 'connected') {
+      // Usuario conectado, obtener información del usuario
+      getUserInfo();
+    } else {
+      // Usuario no conectado, mostrar botón de inicio de sesión
+      document.getElementById('userInfo').innerHTML = '<button onclick="loginWithFacebook()">Iniciar sesión con Facebook</button>';
+    }
+  }
+
+  // Función para realizar el inicio de sesión con Facebook
+  function loginWithFacebook() {
+    FB.login(function(response) {
+      statusChangeCallback(response);
+    }, {scope: 'public_profile,email'});
+  }
+
+  // Función para obtener la información del usuario
+  function getUserInfo() {
+    FB.api('/me', {fields: 'id,name,email'}, function(response) {
+      document.getElementById('userInfo').innerHTML = `
+        <p>Bienvenido, ${response.name}!</p>
+        <p>Email: ${response.email}</p>
+        <button onclick="logout()">Cerrar sesión</button>
+      `;
+    });
+  }
+
+  // Función para cerrar sesión
+  function logout() {
+    FB.logout(function(response) {
+      statusChangeCallback(response);
+    });
+  }
+</script>
+
 </body>
 </html>

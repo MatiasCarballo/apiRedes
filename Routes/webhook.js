@@ -39,6 +39,7 @@ router.post('/', (req, res) => {
   res.sendStatus(200);
 });
 
+
 const sendTextMessage = async (sender, text) => {
   let messageData = { text: text };
   await request({
