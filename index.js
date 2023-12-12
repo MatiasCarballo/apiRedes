@@ -2,7 +2,7 @@ const express = require('express');
 require('dotenv').config();
 const bodyParser = require('body-parser');
 const path = require('path');
-const routes = require('./Routes/index.js');
+const router = require('./Routes/index.js');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -15,7 +15,7 @@ app.use((req, res, next) => {
 });
 app.use(express.json());
 
-app.use("/", routes);
+app.use("/", router);
 
 app.get("/api", (req, res) => {
   res.sendFile(path.resolve(__dirname, 'index.html'));
