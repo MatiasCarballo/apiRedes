@@ -43,7 +43,7 @@
       await getUserInfo();
     } else {
       // Usuario no conectado, mostrar botón de inicio de sesión
-      await document.getElementById('userInfo').innerHTML = '<button onclick="loginWithFacebook()">Iniciar sesión con Facebook</button>';
+      document.getElementById('userInfo').innerHTML = '<button onclick="loginWithFacebook()">Iniciar sesión con Facebook</button>';
     }
   }
 
