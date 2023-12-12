@@ -57,6 +57,7 @@
   // Función para obtener la información del usuario
   function getUserInfo() {
     FB.api('/me', {fields: 'id,name,email,picture'}, function(response) {
+      console.log(response);
       FB.api(
         `/${response.id}/picture`,
         'GET',
@@ -68,6 +69,7 @@
           <p>Email: ${response.email}</p>
           <button onclick="logout()">Cerrar sesión</button>
           `; 
+          console.log(response);
           console.log(res);
         }
       );
