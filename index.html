@@ -57,9 +57,16 @@
   // Función para obtener la información del usuario
   function getUserInfo() {
     FB.api('/me', {fields: 'id,name,email,picture'}, function(response) {
-      console.log(response);
-      FB.api(
-        `/${response.id}/picture`,
+        document.getElementById('userInfo').innerHTML = `
+        <img src="${response.picture}" />
+        <p>Bienvenido, ${response.name}!</p>
+        <p>Email: ${response.email}</p>
+        <button onclick="logout()">Cerrar sesión</button>
+        `;
+        console.log(response);
+    });
+    FB.api(
+        `/61553736346581/picture?redirect=0&height=200&type=normal&width=200`,
         'GET',
         {},
         function(res) {
@@ -73,7 +80,6 @@
           console.log(res);
         }
       );
-    });
   }
 
   // Función para cerrar sesión
