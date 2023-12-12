@@ -15,7 +15,7 @@
   // Inicializar el SDK de Facebook
   window.fbAsyncInit = function() {
     FB.init({
-      appId            : 196135773574850,
+      appId            : 882148299791454,
       autoLogAppEvents : true,
       xfbml            : true,
       version          : 'v18.0'
@@ -37,10 +37,10 @@
    }(document, 'script', 'facebook-jssdk'));
 
   // Función para manejar el cambio de estado de inicio de sesión
-  function statusChangeCallback(response) {
-    if (response.status === 'connected') {
+  async function statusChangeCallback(response) {
+     if (response.status === 'connected') {
       // Usuario conectado, obtener información del usuario
-      getUserInfo();
+      await getUserInfo();
     } else {
       // Usuario no conectado, mostrar botón de inicio de sesión
       document.getElementById('userInfo').innerHTML = '<button onclick="loginWithFacebook()">Iniciar sesión con Facebook</button>';
