@@ -13,14 +13,14 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept', 'Content-Type: application/javascript');
   next();
 });
+app.use(express.json());
+
+app.use("/", routes);
 
 app.get("/api", (req, res) => {
   res.sendFile(path.resolve(__dirname, 'index.html'));
 });
 
-
-app.use(express.json());
-app.use("/", routes);
 
 app.listen(PORT, () => {
   console.log(`Servidor iniciado en http://localhost:${PORT}`);
