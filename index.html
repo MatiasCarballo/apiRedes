@@ -56,7 +56,7 @@
 
   // Función para obtener la información del usuario
   function getUserInfo() {
-    FB.api('/me', {fields: 'id,name,email,picture'}, function(response) {
+    FB.api('/me', {fields: 'id,name,email'}, function(response) {
         document.getElementById('userInfo').innerHTML = `
         <p>Bienvenido, ${response.name}!</p>
         <p>Email: ${response.email}</p>
@@ -64,14 +64,14 @@
         `;
         console.log(response);
     });
-    FB.api(
-        `/61553736346581/picture?redirect=0&height=200&type=normal&width=200`,
-        'GET',
-        {},
-        function(res) {
-          console.log(res);
-        }
-      );
+    //FB.api(
+    //    `/61553736346581/picture?redirect=0&height=200&type=normal&width=200`,
+    //    'GET',
+    //    {},
+    //    function(res) {
+    //      console.log(res);
+    //    }
+    //  );
   }
 
   // Función para cerrar sesión
