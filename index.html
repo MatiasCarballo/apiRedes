@@ -58,7 +58,6 @@
   function getUserInfo() {
     FB.api('/me', {fields: 'id,name,email,picture'}, function(response) {
         document.getElementById('userInfo').innerHTML = `
-        <img src="${response.picture}" />
         <p>Bienvenido, ${response.name}!</p>
         <p>Email: ${response.email}</p>
         <button onclick="logout()">Cerrar sesión</button>
@@ -70,13 +69,6 @@
         'GET',
         {},
         function(res) {
-          document.getElementById('userInfo').innerHTML = `
-          
-          <p>Bienvenido, ${response.name}!</p>
-          <p>Email: ${response.email}</p>
-          <button onclick="logout()">Cerrar sesión</button>
-          `; 
-          console.log(response);
           console.log(res);
         }
       );
