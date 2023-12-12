@@ -63,11 +63,12 @@
         {},
         function(res) {
           document.getElementById('userInfo').innerHTML = `
-          <img src="${response.picture.data.url}" />
+          
           <p>Bienvenido, ${response.name}!</p>
           <p>Email: ${response.email}</p>
           <button onclick="logout()">Cerrar sesión</button>
           `; 
+          console.log(res);
         }
       );
     });
