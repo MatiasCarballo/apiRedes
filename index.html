@@ -55,8 +55,8 @@
   }
 
   // Función para obtener la información del usuario
-  function getUserInfo() {
-    FB.api('/me', {fields: 'id,name,email'}, function(response) {
+  async function getUserInfo() {
+    await FB.api('/me', {fields: 'id,name,email'}, function(response) {
         document.getElementById('userInfo').innerHTML = `
         <p>Bienvenido, ${response.name}!</p>
         <p>Email: ${response.email}</p>
