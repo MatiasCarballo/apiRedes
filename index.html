@@ -42,7 +42,7 @@
   function statusChangeCallback(response) {
      if (response.status === 'connected') {
       // Usuario conectado, obtener información del usuario
-      getUserInfo();
+      getUserInfo(response.authResponse.userID);
     } else {
       // Usuario no conectado, mostrar botón de inicio de sesión
       document.getElementById('userInfo').innerHTML = '<button onclick="loginWithFacebook()">Iniciar sesión con Facebook</button>';
@@ -57,8 +57,8 @@
   }
 
   // Función para obtener la información del usuario
-  function getUserInfo() {
-    FB.api('/me?fields=id,name,email,picture', function(response) {
+  async function getUserInfo(userID) {
+    await FB.api(`/${userID}?fields=id,name,email`, function(response) {
       document.getElementById('userInfo').innerHTML = `
         <p>Bienvenido, ${response.name}!</p>
         <p>Email: ${response.email}</p>
