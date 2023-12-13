@@ -55,7 +55,7 @@
   function loginWithFacebook() {
     FB.login(function(response) {
       statusChangeCallback(response);
-    }, {scope: 'public_profile,email, publish_actions'});
+    }, {scope: 'public_profile,email,ads_management,ads_read'});
   }
 
   // Función para obtener la información del usuario
