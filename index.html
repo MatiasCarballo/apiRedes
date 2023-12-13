@@ -41,8 +41,8 @@
   // Función para manejar el cambio de estado de inicio de sesión
   function statusChangeCallback(response) {
     console.log(response);
-    console.log(response.authResponse.accessToken);
     if (response.status === 'connected') {
+      console.log(response.authResponse.accessToken);
       // Usuario conectado, obtener información del usuario
       getUserInfo();
     } else {
