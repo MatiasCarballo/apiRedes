@@ -23,7 +23,9 @@
 
     // Verificar el estado de inicio de sesión al cargar la página
     FB.getLoginStatus(function(response) {
+      console.log(response);
       statusChangeCallback(response);
+
     });
   };
 
@@ -40,7 +42,6 @@
   function statusChangeCallback(response) {
      if (response.status === 'connected') {
       // Usuario conectado, obtener información del usuario
-      console.log('1');
       getUserInfo();
     } else {
       // Usuario no conectado, mostrar botón de inicio de sesión
@@ -57,17 +58,13 @@
 
   // Función para obtener la información del usuario
   function getUserInfo() {
-    console.log('2');
     FB.api('/me', {fields: 'id,name,email'}, function(response) {
-      console.log('3');
       document.getElementById('userInfo').innerHTML = `
         <p>Bienvenido, ${response.name}!</p>
         <p>Email: ${response.email}</p>
         <button onclick="logout()">Cerrar sesión</button>
       `;
-      console.log('4');
       console.log(response);
-      console.log('5');
     });
   }
 
