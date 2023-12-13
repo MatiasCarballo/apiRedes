@@ -60,7 +60,7 @@
   function loginWithFacebook() {
     FB.login(function(response) {
       statusChangeCallback(response);
-    }, {scope: 'public_profile,email,ads_management,ads_read,pages_show_list,pages_read_engagement,pages_manage_posts,standby,inbox_labels,group_feed'});
+    }, {scope: 'public_profile,email,ads_management,ads_read,pages_show_list,pages_read_engagement,pages_manage_posts'});
   }
 
   // Función para obtener la información del usuario
