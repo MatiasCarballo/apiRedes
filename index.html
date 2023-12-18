@@ -23,7 +23,9 @@
 
     // Verificar el estado de inicio de sesión al cargar la página
     FB.getLoginStatus(function(response) {
+      console.log(response);
       statusChangeCallback(response);
+
     });
   };
 
@@ -38,9 +40,16 @@
 
   // Función para manejar el cambio de estado de inicio de sesión
   function statusChangeCallback(response) {
+    console.log(response);
     if (response.status === 'connected') {
+      console.log(response.authResponse.accessToken);
+      document.getElementById('userInfo').innerHTML = `
+      
+        <button onclick="logout()">Cerrar sesión</button>
+        <button onclick="getUserInfo()">INFO</button>
+      `;
       // Usuario conectado, obtener información del usuario
-      getUserInfo();
+      //getUserInfo();
     } else {
       // Usuario no conectado, mostrar botón de inicio de sesión
       document.getElementById('userInfo').innerHTML = '<button onclick="loginWithFacebook()">Iniciar sesión con Facebook</button>';
@@ -51,19 +60,17 @@
   function loginWithFacebook() {
     FB.login(function(response) {
       statusChangeCallback(response);
-    }, {scope: 'public_profile,email,user_profile'});
+    }, {scope: 'public_profile,emailpages_manage_engagement,pages_manage_posts,pages_read_engagement'});
   }
 
   // Función para obtener la información del usuario
   function getUserInfo() {
-    FB.api('/me', {fields: 'id,name,email,picture'}, function(response) {
-        document.getElementById('userInfo').innerHTML = `
-        <img src="${response.picture.data.url}" />
+    FB.api('/me', {fields: 'id,name,email'}, function(response) {
+      document.getElementById('userInfo').innerHTML = `
         <p>Bienvenido, ${response.name}!</p>
         <p>Email: ${response.email}</p>
         <button onclick="logout()">Cerrar sesión</button>
-        `;
-        console.log(response);
+      `;
     });
   }
 
